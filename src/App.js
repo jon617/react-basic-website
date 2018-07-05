@@ -1,41 +1,66 @@
 import React, { Component } from 'react';
 import {
-  // BrowserRouter as Router,
-  Switch, Route, Link
+  BrowserRouter,
+  Route, Switch,
 } from 'react-router-dom';
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
+import history from './history';
 
+import NavBar   from './NavBar';
 // routes (pages)
-import Home    from './Home';
-import Contact from './Contact';
+import Home     from './Home';
+import Contact  from './Contact';
+import About    from './About';
+import NotFound from './NotFound';
 
 // css
 import './App.css';
+import './pageAnimations.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <Link to="/" className="navbar-brand">
-                Put your name here
-              </Link>
-            </div>
-          </div>
-          <ul className="nav navbar-nav">
-            <li className="active nav-item">
-              <Link to="/contact" className="nav-link">
-                Contact&nbsp;me
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/contact" component={ Contact } />
-          <Route path="/" component={ Home } />
-        </Switch>
-      </div>
+      <BrowserRouter forceRefresh={ ! history }>
+        <div className="App">
+          <NavBar />
+          <main>
+            <Route
+              render={ ({ location }) => {
+                const { pathname } = location;
+                return (
+                  <TransitionGroup>
+                    <CSSTransition
+                      key={ pathname }
+                      classNames="page"
+                      appear
+                      timeout={{ enter: 200, exit: 200 }}
+                    >
+                      <section className="page-main-inner">
+                        <Route
+                          location={ location }
+                          render={ () => {
+                            return (
+                              <Switch>
+                                <Route path="/" exact component={ Home } />
+                                <Route path="/contact" component={ Contact } />
+                                <Route path="/about" component={ About } />
+                                <Route component={ NotFound } />
+                              </Switch>
+                            )
+                          }}
+                        />
+                      </section>
+                    </CSSTransition>
+                  </TransitionGroup>
+                )
+              }}
+            />
+          </main>
+        </div>
+      </BrowserRouter>
     );
   }
 }

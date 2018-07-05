@@ -1,7 +1,28 @@
 .App {
   text-align: center;
 }
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 
-.NavWidth {
-  width: 200px;
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 2;
+}
+
+.page-main {
+  position: relative;
+  margin: 0px auto;
+}
+.page-main-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 70px;
 }

@@ -1,0 +1,33 @@
+.page {
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 0;
+  transition: transform 200ms linear, opacity 200ms linear;
+}
+.page-enter,
+.page-appear {
+  transition: transform 200ms linear, opacity 200ms linear;
+  transform: translate( 10%, 0 );
+  opacity: 0;
+}
+.page-appear-active,
+.page-enter-active {
+  transition: transform 200ms linear, opacity 200ms linear;
+  transform: translate( 0, 0 );
+  opacity: 1;
+}
+.page-exit {
+  transition: transform 200ms linear, opacity 200ms linear;
+  transform: translate( -10%, 0 );
+  opacity: 1;
+}
+.page-exit-active {
+  transition: transform 200ms linear, opacity 200ms linear;
+  opacity: 0;
+  transform: translate( -10%, 0 );
+}

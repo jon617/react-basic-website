@@ -4,7 +4,7 @@ import './Contact.css';
 class Contact extends Component {
   render() {
     return (
-      <div className="Contact">
+      <div className="Page Contact">
         Call me at 512-555-1212
       </div>
     );
